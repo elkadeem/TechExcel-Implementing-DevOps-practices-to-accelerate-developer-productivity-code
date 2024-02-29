@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using RazorPagesTestSample.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace RazorPagesTestSample.Tests.UnitTests
 {
@@ -47,6 +48,36 @@ namespace RazorPagesTestSample.Tests.UnitTests
                 Assert.Equal(expectedMessage, actualMessage);
             }
         }
+
+        // Add unit test to test insert messages with different message lengths
+        [Theory]
+        [InlineData(150, true)]
+        [InlineData(199, true)]
+        [InlineData(200, true)]
+        [InlineData(201, true)]
+        [InlineData(250, true)]
+        [InlineData(251, false)]
+        [InlineData(300, false)]
+        public async Task AddMessageAsync_MessageIsAdded_WithDifferentMessageLength(int messageLength, bool expectedValidMessage)
+        {
+            using (var db = new AppDbContext(Utilities.TestDbContextOptions()))
+            {
+                // Arrange
+                var recId = 10;
+                var expectedMessage = new Message() { Id = recId, Text = new string('x', messageLength) };
+
+                // Act
+                // Valdate using DataAnnotations and validate all properties
+
+                var validationContext = new ValidationContext(expectedMessage);
+                var validationResults = new List<ValidationResult>();
+                var isValidMessage = Validator.TryValidateObject(expectedMessage, validationContext, validationResults, true);
+
+                // Assert
+                Assert.Equal(expectedValidMessage, isValidMessage);               
+            }
+        }
+
 
         [Fact]
         public async Task DeleteAllMessagesAsync_MessagesAreDeleted()

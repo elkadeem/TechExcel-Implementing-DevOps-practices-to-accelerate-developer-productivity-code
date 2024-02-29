@@ -1,3 +1,5 @@
+name: load-test-issue-template
+description: load test issue template
 ---
 title: Load test failure!
 assignees:

@@ -74,7 +74,7 @@ jobs:
 
       - uses: azure/webapps-deploy@v2
         with:
-          app-name: '{your_prefix}-dev'
+          app-name: '5j363plv3fto6-dev'
           images: 5j363plv3fto6mpnpreg.azurecr.io/techboost/dotnetcoreapp:${{github.run_number}}
 
   deploy-to-test:  
@@ -94,7 +94,7 @@ jobs:
 
     - uses: azure/webapps-deploy@v2
       with:
-        app-name: '{your_prefix}-test'
+        app-name: '5j363plv3fto6-test'
         images: 5j363plv3fto6mpnpreg.azurecr.io/techboost/dotnetcoreapp:${{github.run_number}}
 
   deploy-to-prod:
@@ -115,5 +115,5 @@ jobs:
 
     - uses: azure/webapps-deploy@v2
       with:
-        app-name: '{your_prefix}-prod'
+        app-name: '5j363plv3fto6-prod'
         images: 5j363plv3fto6mpnpreg.azurecr.io/techboost/dotnetcoreapp:${{github.run_number}}

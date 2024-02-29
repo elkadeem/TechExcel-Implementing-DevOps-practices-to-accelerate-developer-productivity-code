@@ -3,17 +3,17 @@
 
 name: .NET
 
-env:
-  registryName: 5j363plv3fto6mpnpreg.azurecr.io
-  repositoryName: techboost/dotnetcoreapp
-  dockerFolderPath: Application/src/RazorPagesTestSample
-  tag: ${{github.run_number}}
-
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+
+env:
+  registryName: 5j363plv3fto6mpnpreg.azurecr.io
+  repositoryName: techboost/dotnetcoreapp
+  dockerFolderPath: Application/src/RazorPagesTestSample
+  tag: ${{github.run_number}}
 
 jobs:
   build:
